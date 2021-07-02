@@ -62,16 +62,21 @@ def shopping_list_post():
 def time_post():
     # --> ['5', '6', '8']
     # print(type(request.form['text']))
-
+    TZA = []
     if request.method == 'GET':
       return render_template('time.html')
     elif request.method == 'POST':
           print(request.form['text'].split())
           
           for item in request.form['text'].split():
-            answer = (datetime.datetime.now(pytz.timezone("Europe/Dublin")).strftime('Time = ' + '%H:%M:%S' + ' GMT ' + ' Year = ' + '%d-%m-%Y'))
-            #answer = datetime.datetime.now().strftime('Time == ' + '%H:%M:%S' + ' Year == ' + '%d-%m-%Y')
-            #answer = datetime.datetime.now().strftime('%Y-%m-%d \n %H:%M:%S')
+            item_str = str(item)
+            if item_str in pytz.all_timezones:
+                answer = (datetime.datetime.now(pytz.timezone(item_str)).strftime('Time = ' + '%H:%M:%S' + ' ' + item_str + ' TIME' + ' Year = ' + '%m-%d-%Y'))
+                #answer = datetime.datetime.now().strftime('Time == ' + '%H:%M:%S' + ' Year == ' + '%d-%m-%Y')
+                #answer = datetime.datetime.now().strftime('%Y-%m-%d \n %H:%M:%S')
+            else:
+                answer = "Timezone not found. Please try another one."
+
 
               
               
