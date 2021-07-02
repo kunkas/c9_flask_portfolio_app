@@ -95,7 +95,7 @@ def shopping_list_post():
         except ValueError:
             return "Easy now! Let's keep it simple! Just words with a space between them"
 
-
+@app.route('/shopping_list', methods=['GET', 'POST'])
 def clear_list_post():
     shop_list = []
     return shop_list
