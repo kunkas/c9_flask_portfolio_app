@@ -26,11 +26,11 @@ def add_numbers_post():
     elif request.method == 'POST':
         print(request.form['text'].split())
         total = 0
-        total2 = 1
+
         try:
             for str_num in request.form['text'].split():
                 total += int(str_num)
-                total2 = total2 * int(str_num)
+
             return render_template('add_numbers.html', result=str(total))
         except ValueError:
             return "Easy now! Let's keep it simple! At least 2 numbers with a space between them please"
@@ -44,49 +44,50 @@ def multiply_numbers_post():
         return render_template('add_numbers.html')
     elif request.method == 'POST':
         print(request.form['text'].split())
-        total = 0
+
         total2 = 1
         try:
             for str_num in request.form['text'].split():
-                total += int(str_num)
+
                 total2 = total2 * int(str_num)
             return render_template('add_numbers.html', result1=str(total2))
         except ValueError:
             return "Easy now! Let's keep it simple! At least 2 numbers with a space between them please"
 
 
-@app.route('/divide_numbers', methods=['GET', 'POST'])
-def divide_numbers_post():
-    # --> ['5', '6', '8']
-    # print(type(request.form['text']))
-    if request.method == 'GET':
-        return render_template('add_numbers.html')
-    elif request.method == 'POST':
-        print(request.form['text'].split())
-        total = 0
+# @app.route('/divide_numbers', methods=['GET', 'POST'])
+# def divide_numbers_post():
+#     # --> ['5', '6', '8']
+#     # print(type(request.form['text']))
+#     if request.method == 'GET':
+#         return render_template('add_numbers.html')
+#     elif request.method == 'POST':
+#         print(request.form['text'].split())
+#         total = 0
+#
+#         try:
+#             total2 = request.form['text'][0]
+#             for str_num in request.form['text'].split():
+#                 total2 = int(total2) / int(str_num)
+#             return render_template('add_numbers.html', result=str(total2))
+#         except ValueError:
+#             return "Easy now! Let's keep it simple! At least 2 numbers with a space between them please"
 
-        try:
-            total2 = request.form['text'][0]
-            for str_num in request.form['text'].split():
-                total2 = int(total2) / int(str_num)
-            return render_template('add_numbers.html', result=str(total2))
-        except ValueError:
-            return "Easy now! Let's keep it simple! At least 2 numbers with a space between them please"
 
-
-shop_list = []
+# shop_list = []
 
 
 @app.route('/shopping_list', methods=['GET', 'POST'])
 def shopping_list_post():
     # --> ['5', '6', '8']
     # print(type(request.form['text']))
-
+    shop_list = []
     if request.method == 'GET':
+        # shop_list.clear()
         return render_template('shopping_list.html')
     elif request.method == 'POST':
         print(request.form['text'].split())
-
+        # shop_list = []
         try:
             for item in request.form['text'].split():
                 shop_list.append(str(item))
@@ -95,10 +96,20 @@ def shopping_list_post():
         except ValueError:
             return "Easy now! Let's keep it simple! Just words with a space between them"
 
-@app.route('/shopping_list', methods=['GET', 'POST'])
-def clear_list_post():
-    shop_list = []
-    return shop_list
+
+# @app.route('/clear_list', methods=['GET', 'POST'])
+# def clear_list_post():
+#     if request.method == 'GET':
+#         # shop_list.clear()
+#         return render_template('shopping_list.html')
+#     elif request.method == 'POST':
+#         print(request.form['text'].split())
+#         try:
+#             shop_list.clear()
+#             print(shop_list)
+#             return render_template('shopping_list.html', result=shop_list)
+#         except ValueError:
+#             return "Unable to clear the shopping list!"
 
 
 @app.route('/time', methods=['GET', 'POST'])
